@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grand Circus of Being — A Literary E-Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;800&family=IM+Fell+English:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        burgundy: '#3B0910',
+                        fadedCrimson: '#6B1D2F',
+                        agedParchment: '#F5EFE0',
+                        parchmentDark: '#E8DCC4',
+                        brass: '#B8860B',
+                        mutedGold: '#D4AF37',
+                        smokyCharcoal: '#1A1818',
+                        dustyRose: '#C28CA0',
+                        inkBlack: '#0B0A0A'
+                    },
+                    fontFamily: {
+                        display: ['"Cinzel Decorative"', 'serif'],
+                        heading: ['Cinzel', 'serif'],
+                        literary: ['"IM Fell English"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Victorian & Parchment CSS */
+        :root {
+            --bg-texture: radial-gradient(circle, rgba(27,24,24,0.85) 0%, rgba(11,10,10,0.98) 100%);
+        }
+
+        body {
+            background-color: #0B0A0A;
+            color: #E8DCC4;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Vignette & Grain Overlay */
+        .vignette-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.9);
+            z-index: 40;
+        }
+
+        .paper-card {
+            background: #F5EFE0;
+            color: #1A1818;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 0 40px rgba(184, 134, 11, 0.15);
+            border: 1px solid #B8860B;
+            position: relative;
+        }
+
+        .paper-card-dark {
+            background: #141212;
+            color: #E8DCC4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(107, 29, 47, 0.3);
+            border: 1px solid #6B1D2F;
+        }
+
+        /* Ornate Victorian Borders */
+        .ornate-border {
+            border: 3px double #B8860B;
+            outline: 1px solid #3B0910;
+            outline-offset: -6px;
+        }
+
+        /* Curtain Animations */
+        .curtain-panel {
+            transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1);
+            background: linear-gradient(90deg, #220307 0%, #6B1D2F 25%, #3B0910 50%, #6B1D2F 75%, #190205 100%);
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .curtains-open .curtain-left {
+            transform: translateX(-100%);
+        }
+
+        .curtains-open .curtain-right {
+            transform: translateX(100%);
+        }
+
+        /* Marquee Lights Flicker */
+        @keyframes bulbFlicker {
+            0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px #D4AF37); }
+            52% { opacity: 0.8; filter: drop-shadow(0 0 2px #D4AF37); }
+            54% { opacity: 0.3; filter: none; }
+            56% { opacity: 0.9; filter: drop-shadow(0 0 5px #D4AF37); }
+        }
+
+        .marquee-light {
+            animation: bulbFlicker 4s infinite ease-in-out;
+        }
+        .marquee-light:nth-child(2n) { animation-delay: 0.7s; }
+        .marquee-light:nth-child(3n) { animation-delay: 1.4s; }
+
+        /* Typography drop caps */
+        .drop-cap::first-letter {
+            font-family: 'Cinzel Decorative', serif;
+            float: left;
+            font-size: 3.8rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 12px;
+            padding-bottom: 4px;
+            color: #6B1D2F;
+            font-weight: bold;
+        }
+
+        /* Canvas Particle Background */
+        #dustCanvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.6;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0A0A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B0910;
+            border: 1px solid #B8860B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B1D2F;
+        }
+
+        /* Poetry Formatting Preservation */
+        .poetry-body {
+            font-family: 'IM Fell English', Georgia, serif;
+            white-space: pre-wrap;
+            line-height: 1.9;
+            font-size: 1.15rem;
+        }
+
+        /* Print styles for academic evaluation export */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .paper-card, .paper-card-dark { background: white; color: black; box-shadow: none; border: 1px solid #ccc; }
+        }
+
+        /* Respect Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .curtain-panel, .marquee-light, transition {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col selection:bg-fadedCrimson selection:text-agedParchment">
+
+    <!-- Interactive Canvas Dust & Light Particles -->
+    <canvas id="dustCanvas"></canvas>
+
+    <!-- Static Vignette Overlay -->
+    <div class="vignette-overlay"></div>
+
+    <!-- AUDIO CONTROLLER (Web Audio API synthesis - no external assets needed) -->
+    <div class="fixed top-4 right-4 z-50 flex items-center gap-2 no-print">
+        <button id="reducedMotionBtn" onclick="toggleMotion()" class="px-3 py-1.5 text-xs font-heading border border-brass/50 bg-inkBlack/80 text-parchmentDark rounded hover:border-brass transition" title="Toggle Reduced Motion">
+            <i class="fa-solid fa-person-running mr-1"></i> <span id="motionLabel">Motion: On</span>
+        </button>
+        <button id="audioToggleBtn" onclick="toggleAmbientAudio()" class="p-2.5 rounded-full border border-brass/50 bg-inkBlack/80 text-brass hover:bg-burgundy hover:text-agedParchment transition shadow-lg" title="Toggle Circus Ambient Soundscape">
+            <i id="audioIcon" class="fa-solid fa-volume-xmark text-sm"></i>
+        </button>
+    </div>
+
+    <!-- CURTAIN OPENING OVERLAY (Act 0: Entrance) -->
+    <div id="curtainOverlay" class="fixed inset-0 z-50 flex pointer-events-auto">
+        <!-- Left Curtain -->
+        <div class="curtain-panel curtain-left w-1/2 h-full flex flex-col justify-between items-end pr-4 py-8 border-r-2 border-brass/40 relative">
+            <div class="w-full h-full absolute inset-0 opacity-20 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        </div>
+        <!-- Right Curtain -->
+        <div class="curtain-panel curtain-right w-1/2 h-full flex flex-col justify-between items-start pl-4 py-8 border-l-2 border-brass/40 relative">
+            <div class="w-full h-full absolute inset-0 opacity-20 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        </div>
+
+        <!-- Grand Entrance Content Box (Centered over curtains) -->
+        <div id="entranceContent" class="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 text-center bg-inkBlack/60 backdrop-blur-sm transition-opacity duration-700">
+            <div class="max-w-2xl paper-card p-8 md:p-12 ornate-border rounded-lg relative overflow-hidden">
+                <!-- Ticket Header Detail -->
+                <div class="flex justify-between items-center border-b border-brass/40 pb-3 mb-6 text-xs font-heading tracking-widest text-fadedCrimson">
+                    <span>ADM. NO. 1899-A</span>
+                    <span>ACADEMIC CREATIVE PORTFOLIO</span>
+                    <span>SEAT: RINGSIDE</span>
+                </div>
+
+                <!-- Marquee Title -->
+                <div class="relative py-2 mb-4">
+                    <!-- Subtle Marquee Bulb Row -->
+                    <div class="flex justify-center gap-3 mb-3">
+                        <span class="marquee-light w-2 h-2 rounded-full bg-brass inline-block"></span>
+                        <span class="marquee-light w-2 h-2 rounded-full bg-brass inline-block"></span>
+                        <span class="marquee-light w-2 h-2 rounded-full bg-brass inline-block"></span>
+                        <span class="marquee-light w-2 h-2 rounded-full bg-brass inline-block"></span>
+                        <span class="marquee-light w-2 h-2 rounded-full bg-brass inline-block"></span>
+                    </div>
+
+                    <h1 class="font-display text-2xl sm:text-4xl md:text-5xl font-black text-burgundy tracking-wider uppercase mb-2">
+                        The Grand Circus
+                    </h1>
+                    <div class="text-xl sm:text-2xl font-heading text-fadedCrimson tracking-widest">
+                        OF BEING
+                    </div>
+                </div>
+
+                <div class="w-24 h-0.5 bg-brass mx-auto my-4"></div>
+
+                <p class="font-literary text-lg sm:text-xl italic text-smokyCharcoal/90 my-4 leading-relaxed">
+                    “To Serve, or to Be Served?”
+                </p>
+
+                <p class="font-sans text-xs sm:text-sm text-smokyCharcoal/80 max-w-lg mx-auto mb-8 leading-relaxed">
+                    An inquiry into social performance, performative virtue, identity, and the quiet labor behind the spectacle.
+                </p>
+
+                <!-- Enter Button -->
+                <button onclick="enterCircus()" class="group relative inline-flex items-center gap-3 px-8 py-3.5 bg-burgundy text-agedParchment font-heading text-sm tracking-widest uppercase rounded border-2 border-brass hover:bg-fadedCrimson hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-ticket text-brass group-hover:rotate-12 transition-transform"></i>
+                    Enter The Tent
+                </button>
+
+                <div class="mt-6 text-[10px] text-smokyCharcoal/60 font-sans">
+                    Press <kbd class="px-1 py-0.5 border rounded bg-white/50">Space</kbd> or click to enter directly
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MAIN TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-30 bg-inkBlack/90 border-b border-brass/30 backdrop-blur-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand / Title -->
+            <a href="#act1" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-full bg-burgundy border border-brass flex items-center justify-center text-brass font-display text-xs group-hover:scale-105 transition">
+                    GC
+                </div>
+                <div>
+                    <div class="font-heading text-sm text-agedParchment tracking-wider uppercase group-hover:text-brass transition">The Grand Circus</div>
+                    <div class="text-[10px] font-literary italic text-brass/80">of Being</div>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 font-heading text-xs tracking-wider">
+                <a href="#act1" class="nav-link px-3 py-1.5 rounded text-parchmentDark hover:text-brass hover:bg-burgundy/30 transition">Act I: Fiction</a>
+                <a href="#act2" class="nav-link px-3 py-1.5 rounded text-parchmentDark hover:text-brass hover:bg-burgundy/30 transition">Act II: Non-Fiction</a>
+                <a href="#act3" class="nav-link px-3 py-1.5 rounded text-parchmentDark hover:text-brass hover:bg-burgundy/30 transition">Act III: Poetry</a>
+                <a href="#act4" class="nav-link px-3 py-1.5 rounded text-parchmentDark hover:text-brass hover:bg-burgundy/30 transition">Act IV: Process</a>
+                <a href="#act5" class="nav-link px-3 py-1.5 rounded text-parchmentDark hover:text-brass hover:bg-burgundy/30 transition">Act V: Reflection</a>
+            </nav>
+
+            <!-- Quick Academic Index Toggle & Mobile Menu Btn -->
+            <div class="flex items-center gap-2">
+                <button onclick="toggleIndexModal()" class="px-3 py-1.5 text-xs font-heading border border-brass/40 text-brass rounded hover:bg-brass hover:text-inkBlack transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-list-ol"></i>
+                    <span class="hidden sm:inline">Index</span>
+                </button>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-parchmentDark hover:text-brass">
+                    <i id="mobileMenuIcon" class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu Panel -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-brass/20 bg-inkBlack/95 px-4 pt-2 pb-4 space-y-1">
+            <a href="#act1" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-heading text-parchmentDark hover:bg-burgundy/50 rounded">Act I — Main Attraction (Prose Fiction)</a>
+            <a href="#act2" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-heading text-parchmentDark hover:bg-burgundy/50 rounded">Act II — Backstage Ledger (Non-Fiction)</a>
+            <a href="#act3" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-heading text-parchmentDark hover:bg-burgundy/50 rounded">Act III — The Intermission (Poetry)</a>
+            <a href="#act4" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-heading text-parchmentDark hover:bg-burgundy/50 rounded">Act IV — The Rehearsal Room (Process)</a>
+            <a href="#act5" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-heading text-parchmentDark hover:bg-burgundy/50 rounded">Act V — The Final Bow (Reflection)</a>
+        </div>
+    </header>
+
+
+    <!-- ACADEMIC ASSESSOR INDEX MODAL -->
+    <div id="indexModal" class="fixed inset-0 z-50 hidden bg-inkBlack/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="paper-card max-w-lg w-full p-6 sm:p-8 rounded-lg ornate-border relative max-h-[90vh] overflow-y-auto">
+            <button onclick="toggleIndexModal()" class="absolute top-4 right-4 text-smokyCharcoal hover:text-fadedCrimson text-xl p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <h3 class="font-display text-xl text-burgundy border-b border-brass/40 pb-2 mb-4">
+                Academic Portfolio Contents
+            </h3>
+            <p class="text-xs font-sans text-smokyCharcoal/80 mb-4">
+                This index provides direct navigation and submission tracking for academic evaluation.
+            </p>
+
+            <ul class="space-y-3 font-heading text-xs uppercase tracking-wider text-smokyCharcoal">
+                <li class="p-2 border-b border-brass/20 flex justify-between items-center hover:bg-brass/10 transition rounded">
+                    <a href="#act1" onclick="toggleIndexModal()" class="hover:text-fadedCrimson flex-grow">
+                        <strong>Act I:</strong> Prose Fiction — "The Spotlight Bearer"
+                    </a>
+                    <span class="text-[10px] bg-burgundy/10 text-burgundy px-2 py-0.5 rounded font-sans">Ready</span>
+                </li>
+                <li class="p-2 border-b border-brass/20 flex justify-between items-center hover:bg-brass/10 transition rounded">
+                    <a href="#act2" onclick="toggleIndexModal()" class="hover:text-fadedCrimson flex-grow">
+                        <strong>Act II:</strong> Prose Non-Fiction — "Notes from the Wings"
+                    </a>
+                    <span class="text-[10px] bg-burgundy/10 text-burgundy px-2 py-0.5 rounded font-sans">Ready</span>
+                </li>
+                <li class="p-2 border-b border-brass/20 flex justify-between items-center hover:bg-brass/10 transition rounded">
+                    <a href="#act3" onclick="toggleIndexModal()" class="hover:text-fadedCrimson flex-grow">
+                        <strong>Act III:</strong> Poetry — "The Applause Meter"
+                    </a>
+                    <span class="text-[10px] bg-burgundy/10 text-burgundy px-2 py-0.5 rounded font-sans">Ready</span>
+                </li>
+                <li class="p-2 border-b border-brass/20 flex justify-between items-center hover:bg-brass/10 transition rounded">
+                    <a href="#act4" onclick="toggleIndexModal()" class="hover:text-fadedCrimson flex-grow">
+                        <strong>Act IV:</strong> Creative Process & Drafting
+                    </a>
+                    <span class="text-[10px] bg-burgundy/10 text-burgundy px-2 py-0.5 rounded font-sans">Ready</span>
+                </li>
+                <li class="p-2 border-b border-brass/20 flex justify-between items-center hover:bg-brass/10 transition rounded">
+                    <a href="#act5" onclick="toggleIndexModal()" class="hover:text-fadedCrimson flex-grow">
+                        <strong>Act V:</strong> Critical Reflection & Synthesis
+                    </a>
+                    <span class="text-[10px] bg-burgundy/10 text-burgundy px-2 py-0.5 rounded font-sans">Ready</span>
+                </li>
+            </ul>
+
+            <div class="mt-6 pt-4 border-t border-brass/30 flex justify-between items-center">
+                <button onclick="window.print()" class="px-3 py-1.5 text-xs font-sans border border-burgundy text-burgundy rounded hover:bg-burgundy hover:text-agedParchment transition">
+                    <i class="fa-solid fa-print mr-1"></i> Print / Save PDF
+                </button>
+                <button onclick="toggleIndexModal()" class="px-4 py-1.5 text-xs font-heading bg-burgundy text-agedParchment rounded hover:bg-fadedCrimson">
+                    Close Index
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow z-10 relative max-w-5xl w-full mx-auto px-4 sm:px-6 py-12 space-y-24">
+
+        <!-- PROLOGUE BANNER -->
+        <section class="text-center space-y-4 pt-6">
+            <div class="inline-block px-3 py-1 border border-brass/40 rounded-full text-xs font-heading text-brass tracking-widest uppercase mb-2">
+                Inquiry: “To Serve, or to Be Served?”
+            </div>
+            <h2 class="font-display text-3xl sm:text-5xl text-agedParchment tracking-wide">
+                The Performance Ring
+            </h2>
+            <p class="font-literary text-lg text-parchmentDark/80 max-w-2xl mx-auto italic">
+                “Every act of devotion is also an act of self-display. Step forward, examine the ledger, and observe where service ends and spectacle begins.”
+            </p>
+            <div class="w-16 h-0.5 bg-fadedCrimson mx-auto pt-1"></div>
+        </section>
+
+
+        <!-- ACT I: THE MAIN ATTRACTION (PROSE FICTION) -->
+        <section id="act1" class="scroll-mt-24 space-y-6">
+            <!-- Act Header Card -->
+            <div class="flex items-center justify-between border-b border-brass/40 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-full bg-burgundy text-brass border border-brass flex items-center justify-center font-display text-sm font-bold">I</span>
+                    <div>
+                        <h3 class="font-display text-xl sm:text-2xl text-agedParchment">ACT I — The Main Attraction</h3>
+                        <p class="text-xs font-heading text-brass tracking-wider uppercase">Prose Fiction</p>
+                    </div>
+                </div>
+                <span class="text-xs font-mono text-dustyRose/70 hidden sm:inline">[EXHIBIT A]</span>
+            </div>
+
+            <!-- Fiction Paper Document -->
+            <article class="paper-card p-6 sm:p-10 md:p-12 rounded-lg ornate-border transition-all duration-300">
+                <!-- Title Block -->
+                <header class="text-center mb-8 border-b border-brass/30 pb-6">
+                    <span class="text-xs font-heading tracking-widest text-fadedCrimson uppercase block mb-1">Original Fiction Submission</span>
+                    <h4 id="fictionTitle" class="font-display text-2xl sm:text-4xl text-burgundy font-bold mb-2">
+                        The Spotlight Bearer
+                    </h4>
+                    <p id="fictionSubtitle" class="font-literary text-base sm:text-lg italic text-smokyCharcoal/80">
+                        A short story regarding the fatigue of illuminate duties.
+                    </p>
+                </header>
+
+                <!-- Editable Content Container for Fiction -->
+                <div id="fictionBody" class="font-literary text-base sm:text-lg text-smokyCharcoal leading-relaxed space-y-6 drop-cap">
+                    <!-- Default Example Content (User can edit directly or replace in JavaScript config) -->
+                    <p>
+                        The heavy brass lamp weighed eleven pounds when cold, but after three hours under the high ropes of the tent, it burned like a brand against Arthur’s ribs. Below him, the tightrope walker—a woman whose sequined tights had lost half their glitter to years of trunk storage—balanced on one slipper. The audience did not look at Arthur. They never looked at the lamp bearer. They looked only where the cone of yellow light fell.
+                    </p>
+                    <p>
+                        Yet, without Arthur’s trembling forearms, the performer was merely a ghost tumbling in darkness. Was he serving her art, or was he holding her hostage inside his beam? When he angled the lens two inches to the left, her smile withered slightly; when he centered it, her confidence returned like a sudden gust of wind.
+                    </p>
+                    <blockquote class="border-l-2 border-fadedCrimson pl-4 my-4 italic text-fadedCrimson font-serif">
+                        “To hold the light for another,” the ringmaster had whispered during Arthur’s apprenticeship, “is the highest form of humility. But never forget who controls what the world is permitted to see.”
+                    </blockquote>
+                    <p>
+                        By midnight, the applause had evaporated. The empty seats smelled of damp straw and stale roasted peanuts. Arthur lowered the brass housing, his shoulders throbbed with a dull, satisfying ache. He sat on the edge of the ring, waiting for someone to thank him for illuminated heights, but the performers were already back in their dressing caravans, admiring their own reflections in cracked vanity glass.
+                    </p>
+                </div>
+
+                <!-- Marginal Note / Commentary Box -->
+                <aside class="mt-10 p-4 border border-brass/40 bg-parchmentDark/50 rounded text-xs font-sans text-smokyCharcoal/90 flex gap-3 items-start">
+                    <i class="fa-solid fa-feather-pointed text-fadedCrimson text-base mt-0.5"></i>
+                    <div>
+                        <strong class="font-heading uppercase tracking-wider block mb-1 text-burgundy">Author's Marginalia:</strong>
+                        <span id="fictionNotes">This narrative explores the transactional nature of behind-the-scenes labor. Arthur's role demonstrates how servitude can subtly transform into quiet control over another's social existence.</span>
+                    </div>
+                </aside>
+            </article>
+        </section>
+
+
+        <!-- ACT II: THE BACKSTAGE LEDGER (PROSE NON-FICTION) -->
+        <section id="act2" class="scroll-mt-24 space-y-6">
+            <!-- Act Header Card -->
+            <div class="flex items-center justify-between border-b border-brass/40 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-full bg-burgundy text-brass border border-brass flex items-center justify-center font-display text-sm font-bold">II</span>
+                    <div>
+                        <h3 class="font-display text-xl sm:text-2xl text-agedParchment">ACT II — The Backstage Ledger</h3>
+                        <p class="text-xs font-heading text-brass tracking-wider uppercase">Prose Non-Fiction / Archival Report</p>
+                    </div>
+                </div>
+                <span class="text-xs font-mono text-dustyRose/70 hidden sm:inline">[EXHIBIT B]</span>
+            </div>
+
+            <!-- Ledger Container -->
+            <article class="paper-card p-6 sm:p-10 rounded-lg ornate-border">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-brass/40 pb-4 mb-6 gap-2">
+                    <div>
+                        <span class="text-xs font-mono text-fadedCrimson uppercase">DOCUMENT REF: NF-1904-REV</span>
+                        <h4 id="nonfictionTitle" class="font-display text-xl sm:text-3xl text-burgundy font-bold">
+                            Notes on Performative Virtue
+                        </h4>
+                    </div>
+                    <div class="text-right text-xs font-sans text-smokyCharcoal/70">
+                        <div>DATE OF ENTRY: Autumn Term</div>
+                        <div>STATUS: Archival Essay</div>
+                    </div>
+                </div>
+
+                <!-- Editable Non-Fiction Content Area -->
+                <div id="nonfictionBody" class="font-literary text-base sm:text-lg text-smokyCharcoal leading-relaxed space-y-5">
+                    <p>
+                        In social interactions, altruism often carries the weight of a theatrical prop. We offer assistance, but we implicitly require the presence of an audience—even if that audience is merely our own ego seated in the front row of consciousness.
+                    </p>
+                    <p>
+                        When observing contemporary social dynamics, the boundary between genuine service and self-serving display becomes notoriously porous. The ringmaster does not simply run the show; he convinces the crowd that his authority is a public service. Similarly, in academic and personal life, we frequently perform helpfulness to secure belonging and moral standing.
+                    </p>
+                    <p class="p-4 bg-brass/10 border-l-4 border-brass italic">
+                        "The danger is not that we perform, but that we forget we are wearing makeup, mistaking the painted smile for our true countenance."
+                    </p>
+                    <p>
+                        This essay examines how institutional structures encourage performative compliance, questioning whether unvarnished, invisible service can exist without the expectation of applause.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+
+        <!-- ACT III: THE INTERMISSION (POETRY) -->
+        <section id="act3" class="scroll-mt-24 space-y-6">
+            <!-- Act Header Card -->
+            <div class="flex items-center justify-between border-b border-brass/40 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-full bg-burgundy text-brass border border-brass flex items-center justify-center font-display text-sm font-bold">III</span>
+                    <div>
+                        <h3 class="font-display text-xl sm:text-2xl text-agedParchment">ACT III — The Intermission</h3>
+                        <p class="text-xs font-heading text-brass tracking-wider uppercase">Poetry</p>
+                    </div>
+                </div>
+                <span class="text-xs font-mono text-dustyRose/70 hidden sm:inline">[EXHIBIT C]</span>
+            </div>
+
+            <!-- Dark Atmospheric Stage Card for Poetry -->
+            <article class="paper-card-dark p-8 sm:p-12 rounded-lg ornate-border relative overflow-hidden text-center">
+                <!-- Visual Motif: Single Spotlight Effect -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-96 bg-gradient-to-b from-brass/20 via-brass/5 to-transparent blur-xl pointer-events-none"></div>
+
+                <header class="relative z-10 mb-8">
+                    <span class="text-xs font-heading tracking-widest text-brass uppercase block mb-2">Original Poem</span>
+                    <h4 id="poetryTitle" class="font-display text-2xl sm:text-4xl text-agedParchment">
+                        The Applause Meter
+                    </h4>
+                </header>
+
+                <!-- Poetry Container (Strict Preservation of Formatting and Line Breaks) -->
+                <div id="poetryBody" class="poetry-body relative z-10 text-parchmentDark text-center max-w-md mx-auto my-6 italic">
+The curtain falls in staggered folds,
+The wooden bleachers groan with cold.
+
+We bowed so low our foreheads touched the dust,
+Not out of love, but out of customary trust.
+
+You clapped because the person next to you began;
+I smiled because the puppet maker said I can.
+
+When all the lanterns flicker into dark,
+Who sweeps the sawdust off the velvet mark?
+
+To give is to demand a quiet debt;
+To take is to remember and forget.
+                </div>
+
+                <div class="w-12 h-0.5 bg-brass/40 mx-auto my-6"></div>
+
+                <p id="poetryNote" class="text-xs font-sans text-parchmentDark/60 max-w-sm mx-auto">
+                    Note: Line breaks, stanza spacing, and indentation are intentionally preserved to maintain rhythmic pause.
+                </p>
+            </article>
+        </section>
+
+
+        <!-- ACT IV: THE REHEARSAL ROOM (CREATIVE PROCESS) -->
+        <section id="act4" class="scroll-mt-24 space-y-6">
+            <!-- Act Header Card -->
+            <div class="flex items-center justify-between border-b border-brass/40 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-full bg-burgundy text-brass border border-brass flex items-center justify-center font-display text-sm font-bold">IV</span>
+                    <div>
+                        <h3 class="font-display text-xl sm:text-2xl text-agedParchment">ACT IV — The Rehearsal Room</h3>
+                        <p class="text-xs font-heading text-brass tracking-wider uppercase">Creative Process & Draft Archives</p>
+                    </div>
+                </div>
+                <span class="text-xs font-mono text-dustyRose/70 hidden sm:inline">[EXHIBIT D]</span>
+            </div>
+
+            <!-- Process Grid / Drawers -->
+            <div class="space-y-4">
+                <!-- Inspiration Drawer -->
+                <details class="group paper-card rounded-lg ornate-border overflow-hidden" open>
+                    <summary class="p-4 sm:p-5 font-heading text-sm sm:text-base text-burgundy cursor-pointer flex justify-between items-center select-none bg-brass/10 hover:bg-brass/20 transition">
+                        <span class="flex items-center gap-3">
+                            <i class="fa-solid fa-lightbulb text-brass"></i>
+                            1. Inspiration & Conceptual Seeds
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div id="processInspiration" class="p-6 font-literary text-sm sm:text-base text-smokyCharcoal leading-relaxed space-y-3 border-t border-brass/30">
+                        <p>
+                            Initial ideas stemmed from observing social media mechanics and theatrical metaphors of identity. The circus tent provided an archetype of high visibility where every action is calibrated for an unseen jury.
+                        </p>
+                        <ul class="list-disc list-inside text-xs font-sans space-y-1 text-smokyCharcoal/80">
+                            <li>Key Influence: Kafka's <em>A Hunger Artist</em> (the spectacle of asceticism).</li>
+                            <li>Visual Motif: Lantern light fading into smoke.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Draft Comparisons Drawer -->
+                <details class="group paper-card rounded-lg ornate-border overflow-hidden">
+                    <summary class="p-4 sm:p-5 font-heading text-sm sm:text-base text-burgundy cursor-pointer flex justify-between items-center select-none bg-brass/10 hover:bg-brass/20 transition">
+                        <span class="flex items-center gap-3">
+                            <i class="fa-solid fa-code-compare text-brass"></i>
+                            2. Draft Evolution & Revisions
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="p-6 font-sans text-sm text-smokyCharcoal border-t border-brass/30 space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 border border-fadedCrimson/30 bg-red-950/5 rounded">
+                                <span class="text-xs font-heading text-fadedCrimson font-bold uppercase block mb-1">Early Draft (Discarded)</span>
+                                <p id="draftEarly" class="font-literary text-xs italic text-smokyCharcoal/80">
+                                    "Arthur hated his job holding the light. He wanted to quit and go home, but the ringmaster was too mean to let him leave."
+                                </p>
+                            </div>
+                            <div class="p-4 border border-brass/40 bg-brass/10 rounded">
+                                <span class="text-xs font-heading text-burgundy font-bold uppercase block mb-1">Revised Final Version</span>
+                                <p id="draftFinal" class="font-literary text-xs italic text-smokyCharcoal">
+                                    "The lamp weighed eleven pounds when cold... Without Arthur’s trembling forearms, the performer was merely a ghost tumbling in darkness."
+                                </p>
+                            </div>
+                        </div>
+                        <p id="draftNotes" class="text-xs text-smokyCharcoal/80 italic">
+                            Revision Focus: Shifted away from overt melodrama toward subtle psychological tension and atmospheric sensory details.
+                        </p>
+                    </div>
+                </details>
+
+                <!-- Decision Ledger Drawer -->
+                <details class="group paper-card rounded-lg ornate-border overflow-hidden">
+                    <summary class="p-4 sm:p-5 font-heading text-sm sm:text-base text-burgundy cursor-pointer flex justify-between items-center select-none bg-brass/10 hover:bg-brass/20 transition">
+                        <span class="flex items-center gap-3">
+                            <i class="fa-solid fa-pen-ruler text-brass"></i>
+                            3. Decisions on Imagery, Tone & Structure
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div id="processDecisions" class="p-6 font-literary text-sm sm:text-base text-smokyCharcoal leading-relaxed space-y-3 border-t border-brass/30">
+                        <p>
+                            The structural choice to organize the portfolio into five acts mirrors Victorian theatrical programming. Tone was deliberately restricted to prevent whimsical carnival tropes, focusing instead on worn velvet, dust, and tired muscles.
+                        </p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+
+        <!-- ACT V: THE FINAL BOW (REFLECTION) -->
+        <section id="act5" class="scroll-mt-24 space-y-6">
+            <!-- Act Header Card -->
+            <div class="flex items-center justify-between border-b border-brass/40 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-full bg-burgundy text-brass border border-brass flex items-center justify-center font-display text-sm font-bold">V</span>
+                    <div>
+                        <h3 class="font-display text-xl sm:text-2xl text-agedParchment">ACT V — The Final Bow</h3>
+                        <p class="text-xs font-heading text-brass tracking-wider uppercase">Critical Synthesis & Reflection</p>
+                    </div>
+                </div>
+                <span class="text-xs font-mono text-dustyRose/70 hidden sm:inline">[EXHIBIT E]</span>
+            </div>
+
+            <!-- Reflection Document -->
+            <article class="paper-card p-6 sm:p-10 md:p-12 rounded-lg ornate-border">
+                <header class="border-b border-brass/30 pb-4 mb-6 text-center">
+                    <span class="text-xs font-heading tracking-widest text-fadedCrimson uppercase">Synthesis Question</span>
+                    <h4 class="font-display text-xl sm:text-3xl text-burgundy font-bold mt-1">
+                        “To Serve, or to Be Served?”
+                    </h4>
+                </header>
+
+                <!-- Reflection Content Area (Student Editable) -->
+                <div id="reflectionBody" class="font-literary text-base sm:text-lg text-smokyCharcoal leading-relaxed space-y-6">
+                    <div class="p-4 border border-brass/40 bg-parchmentDark/40 rounded text-xs font-sans text-smokyCharcoal/80">
+                        <i class="fa-solid fa-info-circle mr-1 text-fadedCrimson"></i>
+                        <strong>Academic Evaluation Placeholder:</strong> Replace the text below with your authentic end-of-term reflection synthesizing your creative development across all five acts.
+                    </div>
+
+                    <p class="drop-cap">
+                        As the lights dim over the empty ring, the central question yields no simple answer. Writing this portfolio has revealed that the act of creating literature is itself an ambiguous service: we construct worlds to serve the reader's imagination, yet we secretly yearn for the audience's validation to confirm our existence as artists.
+                    </p>
+                    <p>
+                        Across prose fiction, essayistic inquiry, and poetry, the tension between performative altruism and genuine devotion remains active. To serve without needing to be seen requires an erasure of ego that few performers—and few writers—can fully sustain.
+                    </p>
+                    <p>
+                        Ultimately, the Grand Circus of Being suggests that performance is not inherently deceitful; it is simply the vessel through which human beings reach out from their individual darkness toward one another.
+                    </p>
+                </div>
+
+                <!-- Closing Signature Detail -->
+                <footer class="mt-10 pt-6 border-t border-brass/30 flex flex-col sm:flex-row justify-between items-center text-xs font-heading text-smokyCharcoal/70 gap-4">
+                    <div>
+                        <span>PORTFOLIO COMPLETED BY:</span>
+                        <span id="authorName" class="font-bold text-burgundy ml-1">[AUTHOR NAME PLACEHOLDER]</span>
+                    </div>
+                    <div>
+                        <span>ACADEMIC TERM:</span>
+                        <span id="academicTerm" class="font-bold text-burgundy ml-1">[FALL / SPRING TERM]</span>
+                    </div>
+                </footer>
+            </article>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-inkBlack border-t border-brass/30 py-8 px-4 text-center z-10 relative">
+        <div class="max-w-4xl mx-auto space-y-3">
+            <div class="font-display text-lg text-agedParchment">The Grand Circus of Being</div>
+            <p class="text-xs font-sans text-parchmentDark/60">
+                An Academic Creative Writing Portfolio Website. Designed for independent hosting & Google Sites embedding.
+            </p>
+            <div class="flex justify-center gap-4 text-xs text-brass/80 pt-2 font-heading">
+                <a href="#act1" class="hover:text-agedParchment">Fiction</a> •
+                <a href="#act2" class="hover:text-agedParchment">Non-Fiction</a> •
+                <a href="#act3" class="hover:text-agedParchment">Poetry</a> •
+                <a href="#act4" class="hover:text-agedParchment">Process</a> •
+                <a href="#act5" class="hover:text-agedParchment">Reflection</a>
+            </div>
+            <div class="text-[10px] text-parchmentDark/40 pt-4">
+                © <span id="currentYear"></span> All literary works retained by author under academic fair use.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT: CONTROLLERS, ANIMATIONS & CONTENT MANAGEMENT -->
+    <script>
+        /* ==========================================================================
+           PORTFOLIO CONTENT DATA CONFIGURATION
+           Replace the text within this object to update all portfolio content 
+           without touching any HTML or layout code!
+           ========================================================================== */
+        const PortfolioData = {
+            authorName: "Student Writer",
+            academicTerm: "Academic Year 2026",
+            
+            // ACT I: FICTION
+            fiction: {
+                title: "The Spotlight Bearer",
+                subtitle: "A short story regarding illuminated duties.",
+                body: `<p>The heavy brass lamp weighed eleven pounds when cold, but after three hours under the high ropes of the tent, it burned like a brand against Arthur’s ribs. Below him, the tightrope walker—a woman whose sequined tights had lost half their glitter to years of trunk storage—balanced on one slipper. The audience did not look at Arthur. They never looked at the lamp bearer. They looked only where the cone of yellow light fell.</p>
+                       <p>Yet, without Arthur’s trembling forearms, the performer was merely a ghost tumbling in darkness. Was he serving her art, or was he holding her hostage inside his beam? When he angled the lens two inches to the left, her smile withered slightly; when he centered it, her confidence returned like a sudden gust of wind.</p>
+                       <blockquote class="border-l-2 border-fadedCrimson pl-4 my-4 italic text-fadedCrimson font-serif">“To hold the light for another,” the ringmaster had whispered during Arthur’s apprenticeship, “is the highest form of humility. But never forget who controls what the world is permitted to see.”</blockquote>
+                       <p>By midnight, the applause had evaporated. The empty seats smelled of damp straw and stale roasted peanuts. Arthur lowered the brass housing, his shoulders throbbed with a dull, satisfying ache. He sat on the edge of the ring, waiting for someone to thank him for illuminated heights, but the performers were already back in their dressing caravans, admiring their own reflections in cracked vanity glass.</p>`,
+                notes: "This narrative explores the transactional nature of behind-the-scenes labor. Arthur's role demonstrates how servitude can subtly transform into quiet control over another's social existence."
+            },
+
+            // ACT II: NON-FICTION
+            nonfiction: {
+                title: "Notes on Performative Virtue",
+                body: `<p>In social interactions, altruism often carries the weight of a theatrical prop. We offer assistance, but we implicitly require the presence of an audience—even if that audience is merely our own ego seated in the front row of consciousness.</p>
+                       <p>When observing contemporary social dynamics, the boundary between genuine service and self-serving display becomes notoriously porous. The ringmaster does not simply run the show; he convinces the crowd that his authority is a public service. Similarly, in academic and personal life, we frequently perform helpfulness to secure belonging and moral standing.</p>
+                       <p class="p-4 bg-brass/10 border-l-4 border-brass italic">"The danger is not that we perform, but that we forget we are wearing makeup, mistaking the painted smile for our true countenance."</p>
+                       <p>This essay examines how institutional structures encourage performative compliance, questioning whether unvarnished, invisible service can exist without the expectation of applause.</p>`
+            },
+
+            // ACT III: POETRY
+            poetry: {
+                title: "The Applause Meter",
+                body: `The curtain falls in staggered folds,
+The wooden bleachers groan with cold.
+
+We bowed so low our foreheads touched the dust,
+Not out of love, but out of customary trust.
+
+You clapped because the person next to you began;
+I smiled because the puppet maker said I can.
+
+When all the lanterns flicker into dark,
+Who sweeps the sawdust off the velvet mark?
+
+To give is to demand a quiet debt;
+To take is to remember and forget.`
+            },
+
+            // ACT IV: PROCESS
+            process: {
+                inspiration: `<p>Initial ideas stemmed from observing social media mechanics and theatrical metaphors of identity. The circus tent provided an archetype of high visibility where every action is calibrated for an unseen jury.</p>`,
+                draftEarly: `"Arthur hated his job holding the light. He wanted to quit and go home, but the ringmaster was too mean to let him leave."`,
+                draftFinal: `"The lamp weighed eleven pounds when cold... Without Arthur’s trembling forearms, the performer was merely a ghost tumbling in darkness."`,
+                draftNotes: "Revision Focus: Shifted away from overt melodrama toward subtle psychological tension and atmospheric sensory details.",
+                decisions: `<p>The structural choice to organize the portfolio into five acts mirrors Victorian theatrical programming. Tone was deliberately restricted to prevent whimsical carnival tropes, focusing instead on worn velvet, dust, and tired muscles.</p>`
+            },
+
+            // ACT V: REFLECTION
+            reflection: {
+                body: `<p class="drop-cap">As the lights dim over the empty ring, the central question yields no simple answer. Writing this portfolio has revealed that the act of creating literature is itself an ambiguous service: we construct worlds to serve the reader's imagination, yet we secretly yearn for the audience's validation to confirm our existence as artists.</p>
+                       <p>Across prose fiction, essayistic inquiry, and poetry, the tension between performative altruism and genuine devotion remains active. To serve without needing to be seen requires an erasure of ego that few performers—and few writers—can fully sustain.</p>
+                       <p>Playfully yet seriously, the Grand Circus of Being suggests that performance is not inherently deceitful; it is simply the vessel through which human beings reach out from their individual darkness toward one another.</p>`
+            }
+        };
+
+        // Initialize Portfolio Content on Page Load
+        function loadPortfolioContent() {
+            document.getElementById('authorName').innerText = PortfolioData.authorName;
+            document.getElementById('academicTerm').innerText = PortfolioData.academicTerm;
+            document.getElementById('currentYear').innerText = new Date().getFullYear();
+
+            // Act I
+            document.getElementById('fictionTitle').innerText = PortfolioData.fiction.title;
+            document.getElementById('fictionSubtitle').innerText = PortfolioData.fiction.subtitle;
+            document.getElementById('fictionBody').innerHTML = PortfolioData.fiction.body;
+            document.getElementById('fictionNotes').innerText = PortfolioData.fiction.notes;
+
+            // Act II
+            document.getElementById('nonfictionTitle').innerText = PortfolioData.nonfiction.title;
+            document.getElementById('nonfictionBody').innerHTML = PortfolioData.nonfiction.body;
+
+            // Act III
+            document.getElementById('poetryTitle').innerText = PortfolioData.poetry.title;
+            document.getElementById('poetryBody').innerText = PortfolioData.poetry.body;
+
+            // Act IV
+            document.getElementById('processInspiration').innerHTML = PortfolioData.process.inspiration;
+            document.getElementById('draftEarly').innerText = PortfolioData.process.draftEarly;
+            document.getElementById('draftFinal').innerText = PortfolioData.process.draftFinal;
+            document.getElementById('draftNotes').innerText = PortfolioData.process.draftNotes;
+            document.getElementById('processDecisions').innerHTML = PortfolioData.process.decisions;
+
+            // Act V
+            document.getElementById('reflectionBody').innerHTML = PortfolioData.reflection.body;
+        }
+
+
+        /* ==========================================================================
+           CURTAIN ENTRY & ANIMATION LOGIC
+           ========================================================================== */
+        let curtainsOpened = false;
+
+        function enterCircus() {
+            if (curtainsOpened) return;
+            curtainsOpened = true;
+
+            const curtainOverlay = document.getElementById('curtainOverlay');
+            const entranceContent = document.getElementById('entranceContent');
+
+            // Fade out text card first
+            entranceContent.style.opacity = '0';
+
+            setTimeout(() => {
+                entranceContent.style.display = 'none';
+                curtainOverlay.classList.add('curtains-open');
+                playChimeSound(); // Ambient chime trigger
+            }, 500);
+
+            // Allow interaction through overlay after curtains part
+            setTimeout(() => {
+                curtainOverlay.style.pointerEvents = 'none';
+            }, 2000);
+        }
+
+        // Keyboard navigation (Space or Enter to start)
+        window.addEventListener('keydown', (e) => {
+            if ((e.code === 'Space' || e.code === 'Enter') && !curtainsOpened) {
+                e.preventDefault();
+                enterCircus();
+            }
+        });
+
+
+        /* ==========================================================================
+           WEB AUDIO API - AMBIENT SOUNDSCAPE SYNTHESIZER (No External Sound Downloads)
+           ========================================================================== */
+        let audioCtx = null;
+        let isAudioPlaying = false;
+        let ambientOscillator = null;
+
+        function toggleAmbientAudio() {
+            const btn = document.getElementById('audioToggleBtn');
+            const icon = document.getElementById('audioIcon');
+
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            if (!isAudioPlaying) {
+                startAmbientDrone();
+                isAudioPlaying = true;
+                icon.className = 'fa-solid fa-volume-high text-sm';
+                btn.classList.add('bg-burgundy', 'text-brass');
+            } else {
+                stopAmbientDrone();
+                isAudioPlaying = false;
+                icon.className = 'fa-solid fa-volume-xmark text-sm';
+                btn.classList.remove('bg-burgundy', 'text-brass');
+            }
+        }
+
+        function startAmbientDrone() {
+            if (!audioCtx) return;
+
+            // Low subtle Victorian pipe organ drone simulation
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(110, audioCtx.currentTime); // Low A note
+
+            gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.05, audioCtx.currentTime + 3);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+
+            ambientOscillator = { osc, gain };
+        }
+
+        function stopAmbientDrone() {
+            if (ambientOscillator) {
+                ambientOscillator.gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
+                setTimeout(() => {
+                    try { ambientOscillator.osc.stop(); } catch(e){}
+                    ambientOscillator = null;
+                }, 1000);
+            }
+        }
+
+        function playChimeSound() {
+            if (!audioCtx || audioCtx.state !== 'running') return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 1.2);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 1.2);
+            } catch(e) {}
+        }
+
+
+        /* ==========================================================================
+           CANVAS LIGHT DUST PARTICLES
+           ========================================================================== */
+        const canvas = document.getElementById('dustCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let reducedMotion = false;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function createParticles() {
+            particles = [];
+            const count = Math.floor((window.innerWidth * window.innerHeight) / 18000);
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5 + 0.5,
+                    alpha: Math.random() * 0.6 + 0.2,
+                    speedY: Math.random() * 0.3 - 0.15,
+                    speedX: Math.random() * 0.2 - 0.1
+                });
+            }
+        }
+
+        function animateDust() {
+            if (reducedMotion) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212, 175, 55, ${p.alpha})`;
+                ctx.fill();
+
+                p.y += p.speedY;
+                p.x += p.speedX;
+
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+            });
+
+            requestAnimationFrame(animateDust);
+        }
+
+        function toggleMotion() {
+            reducedMotion = !reducedMotion;
+            document.getElementById('motionLabel').innerText = reducedMotion ? "Motion: Off" : "Motion: On";
+            if (!reducedMotion) {
+                animateDust();
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+
+        /* ==========================================================================
+           NAVIGATION & MODAL CONTROLLERS
+           ========================================================================== */
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleIndexModal() {
+            const modal = document.getElementById('indexModal');
+            modal.classList.toggle('hidden');
+        }
+
+
+        /* ==========================================================================
+           WINDOW INITIALIZATION
+           ========================================================================== */
+        window.onload = function() {
+            loadPortfolioContent();
+            resizeCanvas();
+            createParticles();
+            animateDust();
+
+            // Detect prefers-reduced-motion
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                toggleMotion();
+            }
+        };
+
+        window.onresize = function() {
+            resizeCanvas();
+            createParticles();
+        };
+    </script>
+</body>
+</html>
